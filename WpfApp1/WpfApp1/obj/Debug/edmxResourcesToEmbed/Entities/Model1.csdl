@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="KursModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="idClient" />
+    </Key>
+    <Property Name="idClient" Type="Int32" Nullable="false" />
+    <Property Name="Surname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Lastname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="idGender" Type="Int32" />
+    <Property Name="Phone" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Birhday" Type="DateTime" Precision="0" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Dateregistraton" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Gender" Relationship="Self.FK__Client__idGender__2E1BDC42" FromRole="Client" ToRole="Gender" />
+    <NavigationProperty Name="ServiceClent" Relationship="Self.FK__ServiceCl__idCli__30F848ED" FromRole="Client" ToRole="ServiceClent" />
+  </EntityType>
+  <EntityType Name="Gender">
+    <Key>
+      <PropertyRef Name="idGender" />
+    </Key>
+    <Property Name="idGender" Type="Int32" Nullable="false" />
+    <Property Name="District" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Client" Relationship="Self.FK__Client__idGender__2E1BDC42" FromRole="Gender" ToRole="Client" />
+  </EntityType>
+  <EntityType Name="Images">
+    <Key>
+      <PropertyRef Name="idImage" />
+    </Key>
+    <Property Name="idImage" Type="Int32" Nullable="false" />
+    <Property Name="img" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="InfoService" Relationship="Self.FK__InfoServi__MainI__4E88ABD4" FromRole="Images" ToRole="InfoService" />
+  </EntityType>
+  <EntityType Name="InfoService">
+    <Key>
+      <PropertyRef Name="idInfoService" />
+    </Key>
+    <Property Name="idInfoService" Type="Int32" Nullable="false" />
+    <Property Name="idNameService" Type="Int32" />
+    <Property Name="MainImage" Type="Int32" />
+    <Property Name="Duration" Type="Int32" />
+    <Property Name="Price" Type="Int32" />
+    <Property Name="Descont" Type="Int32" />
+    <NavigationProperty Name="Images" Relationship="Self.FK__InfoServi__MainI__4E88ABD4" FromRole="InfoService" ToRole="Images" />
+    <NavigationProperty Name="NameService" Relationship="Self.FK__InfoServi__idNam__4D94879B" FromRole="InfoService" ToRole="NameService" />
+  </EntityType>
+  <EntityType Name="NameService">
+    <Key>
+      <PropertyRef Name="idNameService" />
+    </Key>
+    <Property Name="idNameService" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="InfoService" Relationship="Self.FK__InfoServi__idNam__4D94879B" FromRole="NameService" ToRole="InfoService" />
+    <NavigationProperty Name="ServiceClent" Relationship="Self.FK__ServiceCl__idNam__5629CD9C" FromRole="NameService" ToRole="ServiceClent" />
+  </EntityType>
+  <EntityType Name="ServiceClent">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="idNameService" Type="Int32" />
+    <Property Name="StartService" Type="DateTime" Precision="0" />
+    <Property Name="idClient" Type="Int32" />
+    <NavigationProperty Name="Client" Relationship="Self.FK__ServiceCl__idCli__30F848ED" FromRole="ServiceClent" ToRole="Client" />
+    <NavigationProperty Name="NameService" Relationship="Self.FK__ServiceCl__idNam__5629CD9C" FromRole="ServiceClent" ToRole="NameService" />
+  </EntityType>
+  <Association Name="FK__Client__idGender__2E1BDC42">
+    <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
+    <End Role="Client" Type="Self.Client" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Gender">
+        <PropertyRef Name="idGender" />
+      </Principal>
+      <Dependent Role="Client">
+        <PropertyRef Name="idGender" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ServiceCl__idCli__30F848ED">
+    <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+    <End Role="ServiceClent" Type="Self.ServiceClent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="idClient" />
+      </Principal>
+      <Dependent Role="ServiceClent">
+        <PropertyRef Name="idClient" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__InfoServi__MainI__4E88ABD4">
+    <End Role="Images" Type="Self.Images" Multiplicity="0..1" />
+    <End Role="InfoService" Type="Self.InfoService" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Images">
+        <PropertyRef Name="idImage" />
+      </Principal>
+      <Dependent Role="InfoService">
+        <PropertyRef Name="MainImage" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__InfoServi__idNam__4D94879B">
+    <End Role="NameService" Type="Self.NameService" Multiplicity="0..1" />
+    <End Role="InfoService" Type="Self.InfoService" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NameService">
+        <PropertyRef Name="idNameService" />
+      </Principal>
+      <Dependent Role="InfoService">
+        <PropertyRef Name="idNameService" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ServiceCl__idNam__5629CD9C">
+    <End Role="NameService" Type="Self.NameService" Multiplicity="0..1" />
+    <End Role="ServiceClent" Type="Self.ServiceClent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NameService">
+        <PropertyRef Name="idNameService" />
+      </Principal>
+      <Dependent Role="ServiceClent">
+        <PropertyRef Name="idNameService" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="KursEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Client" EntityType="Self.Client" />
+    <EntitySet Name="Gender" EntityType="Self.Gender" />
+    <EntitySet Name="Images" EntityType="Self.Images" />
+    <EntitySet Name="InfoService" EntityType="Self.InfoService" />
+    <EntitySet Name="NameService" EntityType="Self.NameService" />
+    <EntitySet Name="ServiceClent" EntityType="Self.ServiceClent" />
+    <AssociationSet Name="FK__Client__idGender__2E1BDC42" Association="Self.FK__Client__idGender__2E1BDC42">
+      <End Role="Gender" EntitySet="Gender" />
+      <End Role="Client" EntitySet="Client" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ServiceCl__idCli__30F848ED" Association="Self.FK__ServiceCl__idCli__30F848ED">
+      <End Role="Client" EntitySet="Client" />
+      <End Role="ServiceClent" EntitySet="ServiceClent" />
+    </AssociationSet>
+    <AssociationSet Name="FK__InfoServi__MainI__4E88ABD4" Association="Self.FK__InfoServi__MainI__4E88ABD4">
+      <End Role="Images" EntitySet="Images" />
+      <End Role="InfoService" EntitySet="InfoService" />
+    </AssociationSet>
+    <AssociationSet Name="FK__InfoServi__idNam__4D94879B" Association="Self.FK__InfoServi__idNam__4D94879B">
+      <End Role="NameService" EntitySet="NameService" />
+      <End Role="InfoService" EntitySet="InfoService" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ServiceCl__idNam__5629CD9C" Association="Self.FK__ServiceCl__idNam__5629CD9C">
+      <End Role="NameService" EntitySet="NameService" />
+      <End Role="ServiceClent" EntitySet="ServiceClent" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

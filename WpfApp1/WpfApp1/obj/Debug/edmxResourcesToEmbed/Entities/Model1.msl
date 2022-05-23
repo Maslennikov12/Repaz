@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище KursModelContainer" CdmEntityContainer="KursEntities">
+    <EntitySetMapping Name="Client">
+      <EntityTypeMapping TypeName="KursModel.Client">
+        <MappingFragment StoreEntitySet="Client">
+          <ScalarProperty Name="idClient" ColumnName="idClient" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+          <ScalarProperty Name="idGender" ColumnName="idGender" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Birhday" ColumnName="Birhday" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Dateregistraton" ColumnName="Dateregistraton" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Gender">
+      <EntityTypeMapping TypeName="KursModel.Gender">
+        <MappingFragment StoreEntitySet="Gender">
+          <ScalarProperty Name="idGender" ColumnName="idGender" />
+          <ScalarProperty Name="District" ColumnName="District" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Images">
+      <EntityTypeMapping TypeName="KursModel.Images">
+        <MappingFragment StoreEntitySet="Images">
+          <ScalarProperty Name="idImage" ColumnName="idImage" />
+          <ScalarProperty Name="img" ColumnName="img" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InfoService">
+      <EntityTypeMapping TypeName="KursModel.InfoService">
+        <MappingFragment StoreEntitySet="InfoService">
+          <ScalarProperty Name="idInfoService" ColumnName="idInfoService" />
+          <ScalarProperty Name="idNameService" ColumnName="idNameService" />
+          <ScalarProperty Name="MainImage" ColumnName="MainImage" />
+          <ScalarProperty Name="Duration" ColumnName="Duration" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Descont" ColumnName="Descont" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NameService">
+      <EntityTypeMapping TypeName="KursModel.NameService">
+        <MappingFragment StoreEntitySet="NameService">
+          <ScalarProperty Name="idNameService" ColumnName="idNameService" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ServiceClent">
+      <EntityTypeMapping TypeName="KursModel.ServiceClent">
+        <MappingFragment StoreEntitySet="ServiceClent">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="idNameService" ColumnName="idNameService" />
+          <ScalarProperty Name="StartService" ColumnName="StartService" />
+          <ScalarProperty Name="idClient" ColumnName="idClient" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
